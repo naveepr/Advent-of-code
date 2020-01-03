@@ -7,7 +7,7 @@ int main(int argc, const char *argv[])
 {
     string fileName;
     char c;
-    long int count;
+    long int count=0, pos=0;
 
     cout<<"Enter the name of the file"<<endl;
     cin >> fileName;
@@ -29,9 +29,12 @@ int main(int argc, const char *argv[])
             default:
                         break;
         }
+        pos++;
+        if (-1 == count)
+           break;
     }
 
     is.close();
-    cout<<count<<endl;
+    cout<<pos<<endl;
     return 0;
 }
