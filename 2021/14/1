@@ -1,0 +1,67 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"regexp"
+)
+
+func check(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func parseInput(scanner *bufio.Scanner) (map[string]string, string) {
+	var input string
+	pol_template := make(map[string]string)
+
+	for scanner.Scan() {
+		s := scanner.Text()
+		if s == "" {
+			break
+		}
+		input = s
+	}
+
+	for scanner.Scan() {
+		s := scanner.Text()
+		regCompile := regexp.MustCompile("(.+) -> (.+)")
+		match := regCompile.FindStringSubmatch(s)
+		pol_template[match[0]] = match[1]
+	}
+
+	return pol_template, input
+}
+
+func Solve(input string, pol_template map[string]string) int {
+	var res int
+	// var str []string
+
+	return res
+}
+
+func main() {
+	arg := os.Args
+	// part1 := true
+
+	// if len(arg) == 3 && arg[2] == "part2" {
+	// 	part1 = false
+	// }
+	f, err := os.Open(arg[1])
+	check(err)
+
+	defer f.Close()
+
+	scanner := bufio.NewScanner(f)
+	pol_template, input := parseInput(scanner)
+	fmt.Println(input)
+	for k, v := range pol_template {
+		fmt.Println(k, v)
+	}
+	ans := Solve(input, pol_template)
+
+	fmt.Println("Answer is ", ans)
+}
